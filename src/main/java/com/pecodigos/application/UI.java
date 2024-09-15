@@ -3,6 +3,7 @@ package com.pecodigos.application;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.pecodigos.dtos.CurrencyDTO;
 import com.pecodigos.models.Currency;
 
 import java.io.IOException;
@@ -18,9 +19,12 @@ public class UI {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("\nEnter the currency's code you want to check (example USD, BRL, EUR): ");
-        String currencyCode = sc.nextLine();
+        String fromCurrencyCode = sc.nextLine().toUpperCase();
 
-        String url = "https://v6.exchangerate-api.com/v6/e7eb64c556eca5a1e312199c/latest/" + currencyCode.toUpperCase();
+        System.out.printf("\nEnter the currency code you want to compare %s with: ", fromCurrencyCode);
+        String toCurrencyCode = sc.nextLine().toUpperCase();
+
+        String url = "https://v6.exchangerate-api.com/v6/e7eb64c556eca5a1e312199c/latest/" + fromCurrencyCode;
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
@@ -29,8 +33,16 @@ public class UI {
 
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
-        System.out.println(gson.fromJson(response.body(), Currency.class));
-        System.out.println();
+        CurrencyDTO currencyDTO = gson.fromJson(response.body(), CurrencyDTO.class);
+
+        Currency currency = new Currency(currencyDTO);
+
+        Double conversionRate = currency.getRate(toCurrencyCode);
+
+        if (conversionRate != null) {
+            System.out.println("\n************************************************\n");
+            System.out.printf("$1.00 %s is $%.3f %s\n\n", fromCurrencyCode, conversionRate, toCurrencyCode);
+        }
     }
 
     public void showHistory() {
@@ -39,6 +51,7 @@ public class UI {
 
     public void goodbyeMessage() {
         System.out.println("""
+                
                 ************************************************
                 ------------------------------------------------
                 
@@ -49,7 +62,6 @@ public class UI {
                 ------------------------------------------------
                 ************************************************
                 """);
-
     }
 
     public void clearScreen() {

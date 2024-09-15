@@ -1,4 +1,6 @@
 package com.pecodigos.dtos;
 
-public record CurrencyDTO(String code, String value) {
+import java.util.Map;
+
+public record CurrencyDTO(String code, Map<String, Double> conversionRates) {
 }

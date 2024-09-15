@@ -1,16 +1,26 @@
 package com.pecodigos.models;
 
+import com.google.gson.annotations.SerializedName;
 import com.pecodigos.dtos.CurrencyDTO;
 import lombok.Data;
+
+import java.util.Map;
 
 @Data
 public class Currency {
 
-    private String code;
-    private double value;
+    @SerializedName("base_code")
+    private String currencyCode;
+
+    @SerializedName("conversion_rates")
+    private Map<String, Double> conversionRates;
 
     public Currency(CurrencyDTO currencyDTO) {
-        this.code = currencyDTO.code();
-        this.value = Double.parseDouble(currencyDTO.value());
+        this.currencyCode = currencyDTO.code();
+        this.conversionRates = currencyDTO.conversionRates();
+    }
+
+    public Double getRate(String code) {
+        return conversionRates != null ? conversionRates.get(code.toUpperCase()) : null;
     }
 }
