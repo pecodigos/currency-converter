@@ -39,10 +39,8 @@ public class CurrencyConverter {
                 default:
                     ui.goodbyeMessage();
                     ui.clearScreen();
+                    exit = true;
                     break;
-            }
-            if (n == 0) {
-                exit = true;
             }
         }
         sc.close();
