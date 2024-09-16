@@ -11,9 +11,16 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UI {
+
+    private final List<String> historyList = new ArrayList<>();
+    DateTimeFormatter dateTimeFormatter =DateTimeFormatter.ofPattern("yyyy/MM/dd, HH:mm");
 
     public void convertCurrency() throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
@@ -28,25 +35,33 @@ public class UI {
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
-
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
         CurrencyDTO currencyDTO = gson.fromJson(response.body(), CurrencyDTO.class);
-
         Currency currency = new Currency(currencyDTO);
 
         Double conversionRate = currency.getRate(toCurrencyCode);
 
+        LocalDateTime localDateTime = LocalDateTime.now();
+        String formattedTime = localDateTime.format(dateTimeFormatter);
+
+        historyList.add(String.format("$1.00 %s was $%.3f %s at %s\n\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime));
+
         if (conversionRate != null) {
             System.out.println("\n************************************************\n");
-            System.out.printf("$1.00 %s is $%.3f %s\n\n", fromCurrencyCode, conversionRate, toCurrencyCode);
+            System.out.printf("$1.00 %s is $%.3f %s at %s\n\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime);
         }
     }
 
     public void showHistory() {
-        System.out.println("\nHistory here.\n");
+        System.out.println("\n************************************************\n");
+        int i = 1;
+        for (String history : historyList) {
+            System.out.printf("%d- %s", i, history);
+            i++;
+        }
     }
 
     public void goodbyeMessage() {
@@ -67,5 +82,16 @@ public class UI {
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public void pressAnyKey() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("\n************************************************\n");
+
+        System.out.print("Press any key to continue: ");
+        sc.nextLine();
+
+        System.out.println();
     }
 }

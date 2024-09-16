@@ -28,18 +28,25 @@ public class CurrencyConverter {
             int n = sc.nextInt();
 
             switch (n) {
+                case 0:
+                    ui.goodbyeMessage();
+                    ui.clearScreen();
+                    exit = true;
+                    break;
                 case 1:
                     ui.convertCurrency();
+                    ui.pressAnyKey();
                     ui.clearScreen();
                     break;
                 case 2:
                     ui.showHistory();
+                    ui.pressAnyKey();
                     ui.clearScreen();
                     break;
                 default:
-                    ui.goodbyeMessage();
+                    System.out.println("\nThere's no option with that number.");
+                    ui.pressAnyKey();
                     ui.clearScreen();
-                    exit = true;
                     break;
             }
         }
