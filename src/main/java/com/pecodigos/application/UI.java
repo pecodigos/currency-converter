@@ -47,19 +47,19 @@ public class UI {
         LocalDateTime localDateTime = LocalDateTime.now();
         String formattedTime = localDateTime.format(dateTimeFormatter);
 
-        historyList.add(String.format("$1.00 %s was $%.3f %s at %s\n\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime));
+        historyList.add(String.format("$1.00 %s was $%.3f %s at %s\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime));
 
         if (conversionRate != null) {
-            System.out.println("\n************************************************\n");
-            System.out.printf("$1.00 %s is $%.3f %s at %s\n\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime);
+            System.out.println("\n****************************************************************************\n");
+            System.out.printf("\t\t\t\t$1.00 %s is $%.3f %s at %s\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime);
         }
     }
 
     public void showHistory() {
-        System.out.println("\n************************************************\n");
+        System.out.println("\n****************************************************************************\n");
         int i = 1;
         for (String history : historyList) {
-            System.out.printf("%d- %s", i, history);
+            System.out.printf("\t\t\t  %d- %s", i, history);
             i++;
         }
     }
@@ -67,15 +67,15 @@ public class UI {
     public void goodbyeMessage() {
         System.out.println("""
                 
-                ************************************************
-                ------------------------------------------------
+                ****************************************************************************
+                ----------------------------------------------------------------------------
                 
-                         ORACLE NEXT EDUCATION CHALLENGE
-                                MADE BY PECODIGOS
-                        THANKS FOR USING THIS APPLICATION
+                                     ORACLE NEXT EDUCATION CHALLENGE
+                                            MADE BY PECODIGOS
+                                    THANKS FOR USING THIS APPLICATION
                 
-                ------------------------------------------------
-                ************************************************
+                ----------------------------------------------------------------------------
+                ****************************************************************************
                 """);
     }
 
@@ -87,7 +87,7 @@ public class UI {
     public void pressAnyKey() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("\n************************************************\n");
+        System.out.println("\n****************************************************************************\n");
 
         System.out.print("Press any key to continue: ");
         sc.nextLine();
