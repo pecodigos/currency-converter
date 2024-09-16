@@ -30,6 +30,7 @@ public class CurrencyConverter {
             switch (n) {
                 case 0:
                     ui.goodbyeMessage();
+                    ui.pressAnyKey();
                     ui.clearScreen();
                     exit = true;
                     break;
