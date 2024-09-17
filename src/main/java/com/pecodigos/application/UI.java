@@ -94,8 +94,8 @@ public class UI {
     public void goodbyeMessage() {
         clearScreen();
         System.out.println("""
-                
                 **************************************************************************
+                
                 --------------------------------------------------------------------------
                 
                                      ORACLE NEXT EDUCATION CHALLENGE
@@ -103,7 +103,6 @@ public class UI {
                                     THANKS FOR USING THIS APPLICATION
                 
                 --------------------------------------------------------------------------
-                **************************************************************************
                 """);
     }
 
@@ -122,18 +121,19 @@ public class UI {
     }
 
     public void printStars() {
-        System.out.println("\n**************************************************************************");
+        System.out.println("**************************************************************************");
     }
 
     public void printHyphenLine() {
-        System.out.println("\n--------------------------------------------------------------------------");
+        System.out.println("\n--------------------------------------------------------------------------\n");
     }
 
     public void invalidInputOutput() {
         clearScreen();
+
         printStars();
         printHyphenLine();
-        System.out.println("\n\t\tInvalid input. Please enter a valid number.");
+        System.out.println("\t\tInvalid input. Please enter a valid number.");
         printHyphenLine();
     }
 }
