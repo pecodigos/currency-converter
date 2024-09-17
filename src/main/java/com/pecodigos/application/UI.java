@@ -27,10 +27,10 @@ public class UI {
             clearScreen();
 
             System.out.print("\nEnter the currency's code you want to check (e.g. USD, BRL, EUR): ");
-            String fromCurrencyCode = sc.nextLine().toUpperCase();
+            String fromCurrencyCode = sc.nextLine().toUpperCase().trim();
 
             System.out.printf("\nEnter the currency code you want to compare %s with: ", fromCurrencyCode);
-            String toCurrencyCode = sc.nextLine().toUpperCase();
+            String toCurrencyCode = sc.nextLine().toUpperCase().trim();
 
             String url = "https://v6.exchangerate-api.com/v6/e7eb64c556eca5a1e312199c/latest/" + fromCurrencyCode;
 
