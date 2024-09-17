@@ -9,23 +9,27 @@ public class CurrencyConverter {
 
         boolean exit = false;
         UI ui = new UI();
+        int n;
 
         while (!exit) {
+            ui.clearScreen();
             System.out.println("""
-                    ****************************************************************************
+                    **************************************************************************
                     
-                    ---------------------------- CURRENCY CONVERTER ----------------------------
+                    --------------------------- CURRENCY CONVERTER ---------------------------
                     
-                                                1- Convert currency.
-                                                2- Show history.
-                                                0- Exit the program.
+                                               1- Convert currency.
+                                               2- Show history.
+                                               0- Exit the program.
                     
-                    ----------------------------------------------------------------------------
+                    --------------------------------------------------------------------------
                     
-                    ****************************************************************************
+                    **************************************************************************
                     """);
-            System.out.print("Enter the option's number: ");
-            int n = sc.nextInt();
+
+                System.out.print("Enter the option's number: ");
+                 n = sc.nextInt();
+
 
             switch (n) {
                 case 0:
@@ -37,17 +41,14 @@ public class CurrencyConverter {
                 case 1:
                     ui.convertCurrency();
                     ui.pressAnyKey();
-                    ui.clearScreen();
                     break;
                 case 2:
                     ui.showHistory();
                     ui.pressAnyKey();
-                    ui.clearScreen();
                     break;
                 default:
                     System.out.println("\nThere's no option with that number.");
                     ui.pressAnyKey();
-                    ui.clearScreen();
                     break;
             }
         }

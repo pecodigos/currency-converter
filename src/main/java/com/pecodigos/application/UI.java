@@ -49,33 +49,49 @@ public class UI {
 
         historyList.add(String.format("$1.00 %s was $%.3f %s at %s\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime));
 
+        clearScreen();
+
         if (conversionRate != null) {
-            System.out.println("\n****************************************************************************\n");
-            System.out.printf("\t\t\t\t$1.00 %s is $%.3f %s at %s\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime);
+            System.out.println("""
+                    **************************************************************************
+                                               CONVERSION INFORMATION:
+                    """);
+            System.out.printf("\t\t$1.00 %s is $%.3f %s at %s\n", fromCurrencyCode, conversionRate, toCurrencyCode, formattedTime);
         }
     }
 
     public void showHistory() {
-        System.out.println("\n****************************************************************************\n");
+        clearScreen();
+        System.out.println("""
+                
+                **************************************************************************
+                --------------------------- CONVERSION HISTORY ---------------------------
+                """);
         int i = 1;
+
+        if (historyList.isEmpty()) {
+            System.out.println("\t\t    You didn't convert anything yet.");
+        }
+
         for (String history : historyList) {
-            System.out.printf("\t\t\t  %d- %s", i, history);
+            System.out.printf("\t\t%d- %s", i, history);
             i++;
         }
     }
 
     public void goodbyeMessage() {
+        clearScreen();
         System.out.println("""
                 
-                ****************************************************************************
-                ----------------------------------------------------------------------------
+                **************************************************************************
+                --------------------------------------------------------------------------
                 
                                      ORACLE NEXT EDUCATION CHALLENGE
                                             MADE BY PECODIGOS
                                     THANKS FOR USING THIS APPLICATION
                 
-                ----------------------------------------------------------------------------
-                ****************************************************************************
+                --------------------------------------------------------------------------
+                **************************************************************************
                 """);
     }
 
@@ -87,9 +103,9 @@ public class UI {
     public void pressAnyKey() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("\n****************************************************************************\n");
+        System.out.println("\n**************************************************************************\n");
 
-        System.out.print("Press any key to continue: ");
+        System.out.print("Press enter to continue: ");
         sc.nextLine();
 
         System.out.println();
