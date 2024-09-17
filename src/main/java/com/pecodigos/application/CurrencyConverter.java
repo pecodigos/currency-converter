@@ -1,10 +1,10 @@
 package com.pecodigos.application;
 
-import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CurrencyConverter {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
         boolean exit = false;
@@ -12,8 +12,9 @@ public class CurrencyConverter {
         int n;
 
         while (!exit) {
-            ui.clearScreen();
-            System.out.println("""
+            try {
+                ui.clearScreen();
+                System.out.println("""
                     **************************************************************************
                     
                     --------------------------- CURRENCY CONVERTER ---------------------------
@@ -28,28 +29,33 @@ public class CurrencyConverter {
                     """);
 
                 System.out.print("Enter the option's number: ");
-                 n = sc.nextInt();
+                n = sc.nextInt();
+                sc.nextLine();
 
-
-            switch (n) {
-                case 0:
-                    ui.goodbyeMessage();
-                    ui.pressAnyKey();
-                    ui.clearScreen();
-                    exit = true;
-                    break;
-                case 1:
-                    ui.convertCurrency();
-                    ui.pressAnyKey();
-                    break;
-                case 2:
-                    ui.showHistory();
-                    ui.pressAnyKey();
-                    break;
-                default:
-                    System.out.println("\nThere's no option with that number.");
-                    ui.pressAnyKey();
-                    break;
+                switch (n) {
+                    case 0:
+                        ui.goodbyeMessage();
+                        ui.pressEnter(sc);
+                        ui.clearScreen();
+                        exit = true;
+                        break;
+                    case 1:
+                        ui.convertCurrency(sc);
+                        ui.pressEnter(sc);
+                        break;
+                    case 2:
+                        ui.showHistory();
+                        ui.pressEnter(sc);
+                        break;
+                    default:
+                        System.out.println("\nThere's no option with that number.");
+                        ui.pressEnter(sc);
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                ui.invalidInputOutput();
+                sc.nextLine();
+                ui.pressEnter(sc);
             }
         }
         sc.close();
