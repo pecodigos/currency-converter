@@ -26,17 +26,16 @@ You will also need an API key for the [ExchangeRate API](https://exchangerate-ap
     cd currency-converter
     ```
 
-2. Compile and execute the project using Maven:
+2. Compile the project using Maven:
     ```bash
     mvn compile
-    mvn exec:java
     ```
 
 ## Usage
 
-1. Run the application:
+1. Run the application on a Terminal Emulator using Maven:
     ```bash
-    java -jar target/currency-converter.jar
+    mvn exec:java
     ```
 
 2. Once running, you will see the following options:
