@@ -12,7 +12,7 @@ This is a simple Command Line Interface (CLI) application that converts currenci
 
 Before running the project, ensure you have the following installed:
 
-- [Java 21+](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
+- [Java 21](https://www.oracle.com/java/technologies/downloads/?er=221886#java21)
 - [Maven](https://maven.apache.org/download.cgi)
 
 You will also need an API key for the [ExchangeRate API](https://exchangerate-api.com/).
@@ -26,9 +26,10 @@ You will also need an API key for the [ExchangeRate API](https://exchangerate-ap
     cd currency-converter
     ```
 
-2. Build the project using Maven:
+2. Compile and execute the project using Maven:
     ```bash
-    mvn clean install
+    mvn compile
+    mvn exec:java
     ```
 
 ## Usage
@@ -58,15 +59,6 @@ You will also need an API key for the [ExchangeRate API](https://exchangerate-ap
     - View your conversion history.
     - Exit the program.
 
-## Program Structure
-
-- The main class (`CurrencyConverter`) manages the application's user interface and interactions.
-- The `UI` class handles the logic for converting currencies (`convertCurrency`) and displaying conversion history (`showHistory`).
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-Made with ❤️ by [Pecodigos](https://github.com/pecodigos)
